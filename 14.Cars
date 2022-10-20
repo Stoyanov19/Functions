@@ -1,0 +1,30 @@
+function solve(commands) {
+    const cars = {};
+    const functionsMapping = {
+        create(name, inherits, parentName) {
+            cars[name] = inherits ? {inherits: parentName} : {};
+        },
+        set(name, key, value) {
+            cars[name][key] = value;
+        },
+
+        print(name) {
+            let parentName = cars[name]['inherits'];
+            let car = cars[name];
+            while (parentName) {
+                car = Object.assign(cars[name], cars[parentName]);
+                parentName = cars[parentName]['inherits'];
+            }
+            console.log(
+                Object.entries(car)
+                    .filter(kvp => kvp[0] !== 'inherits')
+                    .map(kvp => `${kvp[0]}:${kvp[1]}`)
+                    .join(','));
+
+        },
+    };
+    for (const command of commands) {
+        let [func, ...args] = command.split(' ');
+        functionsMapping[func](...args);
+    }
+}
