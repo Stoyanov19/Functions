@@ -1,0 +1,23 @@
+function signCheck(numOne, numTwo, numThree) {
+    let totalNegativ = 0;
+    if (isNegativ(numOne)) {
+        totalNegativ++;
+    }
+    if (isNegativ(numTwo)) {
+        totalNegativ++;
+    }
+    if (isNegativ(numThree)) {
+        totalNegativ++;
+    }
+    if (totalNegativ % 2 === 0) {
+        console.log("Positive")
+
+    } else {
+        console.log("Negative")
+
+    }
+    function isNegativ(number) {
+        return number < 0;
+
+    }
+}
